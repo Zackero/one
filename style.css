@@ -1,0 +1,243 @@
+/* 全局样式重置 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    background: url('../assets/images/background.png') no-repeat center center fixed;
+    background-size: cover;
+    color: #1d1d1f;
+    line-height: 1.5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+.game-container {
+    background: url('../assets/images/background.png') no-repeat center center;
+    background-size: cover;
+    border-radius: 20px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5);
+    padding: 30px;
+    max-width: 800px;
+    width: 100%;
+    position: relative;
+}
+
+/* 游戏容器的遮罩层，用于区分背景 */
+.game-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(255, 255, 255, 0.6);
+    border-radius: 20px;
+    z-index: 0;
+}
+
+/* 确保游戏内容在遮罩层之上 */
+.game-container > * {
+    position: relative;
+    z-index: 1;
+}
+
+/* 游戏头部 */
+.game-header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+h1 {
+    font-size: 2.5em;
+    margin-bottom: 20px;
+    background: linear-gradient(45deg, #34c759, #30d158);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/* 分数容器 */
+.score-container {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    margin-bottom: 20px;
+}
+
+.score-box {
+    background-color: #f5f5f7;
+    padding: 10px 20px;
+    border-radius: 10px;
+    font-weight: 500;
+}
+
+.score-box span:last-child {
+    color: #34c759;
+    margin-left: 5px;
+}
+
+/* 控制区域 */
+.controls {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+select, button {
+    padding: 8px 16px;
+    border-radius: 8px;
+    border: none;
+    font-size: 1em;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+select {
+    background-color: #f5f5f7;
+    color: #1d1d1f;
+}
+
+select:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(0, 122, 255, 0.3);
+}
+
+button {
+    background-color: #34c759;
+    color: white;
+    font-weight: 500;
+}
+
+button:hover {
+    background-color: #30d158;
+    transform: translateY(-1px);
+}
+
+button:active {
+    transform: translateY(0);
+}
+
+/* 游戏画布 */
+#gameCanvas {
+    display: block;
+    margin: 0 auto;
+    background-color: #fafafa;
+    border-radius: 10px;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+/* 游戏说明 */
+.game-footer {
+    margin-top: 30px;
+    text-align: center;
+}
+
+.instructions {
+    background-color: #f5f5f7;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.instructions h2 {
+    color: #1d1d1f;
+    margin-bottom: 15px;
+    font-size: 1.5em;
+}
+
+.instructions p {
+    margin-bottom: 10px;
+}
+
+/* 食物效果列表 */
+.food-effects {
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 15px;
+    margin-top: 15px;
+}
+
+.food-effects li {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+/* 食物图标 */
+.food-icon {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+.peach {
+    background-color: #ffd700;
+    box-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
+}
+
+.dragon-fruit {
+    background-color: #ff4d4d;
+    box-shadow: 0 0 10px rgba(255, 77, 77, 0.3);
+}
+
+.jade-dew {
+    background-color: #7fffd4;
+    box-shadow: 0 0 10px rgba(127, 255, 212, 0.3);
+}
+
+.golden-pill {
+    background-color: #ffa500;
+    box-shadow: 0 0 10px rgba(255, 165, 0, 0.3);
+}
+
+.black-food {
+    background-color: #000000;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+/* 响应式设计 */
+@media (max-width: 600px) {
+    .game-container {
+        padding: 15px;
+    }
+
+    h1 {
+        font-size: 2em;
+    }
+
+    .score-container {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .controls {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    select, button {
+        width: 100%;
+        max-width: 200px;
+    }
+
+    #gameCanvas {
+        width: 100%;
+        height: auto;
+    }
+
+    .food-effects {
+        grid-template-columns: 1fr;
+    }
+} 
